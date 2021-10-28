@@ -81,7 +81,7 @@ class ServiceProvider extends AddonServiceProvider
 
     protected function bootDirectives(): self
     {
-        Blade::directive('nexus-responsive', function ($arguments) {
+        Blade::directive('nexusresponsive', function ($arguments) {
             return "<?php echo NexusResponsiveTag::render({$arguments}) ?>";
         });
 
