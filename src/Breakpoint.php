@@ -55,7 +55,7 @@ class Breakpoint implements Arrayable
     {
         return $this->getWidths()
             ->map(function (int $width) use ($format) {
-                return "{$this->buildImageJob($width, $format, $this->ratio)->handle()} {$width}w";
+                return "{$this->buildImageJob($width, $format, $this->ratio)} {$width}w";
             })
             ->when($includePlaceholder, function (Collection $widths) {
                 return $widths->prepend($this->placeholderSrc());
