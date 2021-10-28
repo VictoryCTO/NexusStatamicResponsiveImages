@@ -49,7 +49,8 @@ class FileUtils {
         return $asset;
     }
 
-    public static function imageUrl( $image, $params ) {
+    public static function imageUrl( $image, $params ): String
+    {
         $image = static::retrieveAsset( $image );
 
         $path = app( ImageManipulator::class )->item( $image )->params( $params )->build();
@@ -65,7 +66,8 @@ class FileUtils {
         //return app(GlideImageManipulator::class)->item($image)->params($params)->build();
     }
 
-    public static function ServeGeneratedImagesFromDisk() {
+    public static function ServeGeneratedImagesFromDisk(): String
+    {
         $disk = config('statamic.nexus.responsive-images.copy_generated_images_to_disk');
 
         //if there is no disk configured

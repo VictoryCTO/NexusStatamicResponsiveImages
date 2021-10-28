@@ -6,7 +6,6 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 use League\Flysystem\FileNotFoundException;
 use League\Glide\Server;
-use VictoryCTO\NexusResponsiveImages\Jobs\GenerateImageJob;
 use Statamic\Contracts\Assets\Asset;
 use Statamic\Facades\Blink;
 use Statamic\Imaging\ImageGenerator;
@@ -102,7 +101,7 @@ class Breakpoint implements Arrayable
             });
     }
 
-    public function buildImageJob(int $width, ?string $format = null, ?float $ratio = null): GenerateImageJob
+    public function buildImageJob(int $width, ?string $format = null, ?float $ratio = null): String
     {
         $params = $this->getParams($format);
 
@@ -112,18 +111,7 @@ class Breakpoint implements Arrayable
             $params['height'] = $width / $ratio;
         }
 
-        return app(GenerateImageJob::class, ['asset' => $this->asset, 'params' => $params]);
-    }
-
-    public function dispatchImageJobs(): void
-    {
-        $this->getWidths()
-            ->map(function (int $width) {
-                dispatch($this->buildImageJob($width, null, $this->ratio));
-                if (config('statamic.nexus.responsive-images.webp', true)) {
-                    dispatch($this->buildImageJob($width, 'webp', $this->ratio));
-                }
-            });
+        return FileUtils::imageUrl($this->asset, $params);
     }
 
     public function toArray(): array
