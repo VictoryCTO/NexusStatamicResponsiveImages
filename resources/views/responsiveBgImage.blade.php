@@ -50,7 +50,7 @@ array_walk($elements, function(&$value, $elements) {
         @foreach($elements as $el)
             @php( $maxH = $el['ratio'] * $maxW )
                 {!! $el['element'] !!} {
-            background-image: url('{{ nexus_image_url( $el['image'], ['w'=>$maxW, 'h'=>$el['height']] ) }}');
+            background-image: url('{{ \VictoryCTO\NexusResponsiveImages\FileUtils::imageUrl( $el['image'], ['w'=>$maxW, 'h'=>$el['height']] ) }}');
         }
         @endforeach
         @if($i>1)

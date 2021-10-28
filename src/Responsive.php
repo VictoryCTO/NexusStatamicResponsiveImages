@@ -23,14 +23,6 @@ class Responsive
     {
         $this->parameters = $parameters;
 
-        if ($assetParam instanceof Value && $assetParam->fieldtype() instanceof ResponsiveFieldtype) {
-            $this->parameters = collect($assetParam->value())->map(function ($value) {
-                return $value instanceof Value ? $value->value() : $value;
-            })->merge($this->parameters->toArray())->except('src');
-
-            $assetParam = $assetParam->raw()['src'];
-        }
-
         $this->asset = $this->retrieveAsset($assetParam);
 
         if ((int) $this->asset->width() === 0 || (int) $this->asset->height() === 0) {
