@@ -60,6 +60,7 @@ class NexusResponsiveBgTag extends Tags
                 'breakpoint_max_widths' => $breakpoint_max_widths,
                 'breakpoints'           => $breakpoints,
                 'breakpoint_unit'       => $breakpoint_unit,
+                'elements'              => $elements,
             ])->render();
     }
 }
