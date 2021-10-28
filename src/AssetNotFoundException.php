@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\ResponsiveImages;
+namespace VictoryCTO\NexusResponsiveImages;
 
 use Exception;
 

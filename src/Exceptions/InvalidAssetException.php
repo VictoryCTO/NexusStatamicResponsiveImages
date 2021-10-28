@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\ResponsiveImages\Exceptions;
+namespace VictoryCTO\NexusResponsiveImages\Exceptions;
 
 use Exception;
 use Statamic\Assets\Asset;

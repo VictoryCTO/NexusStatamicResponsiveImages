@@ -4,41 +4,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Generate On Upload
-    |--------------------------------------------------------------------------
-    |
-    | Whether image conversions should be generated on upload
-    |
-    */
-
-    'generate_on_upload' => true,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Generate Image Job
-    |--------------------------------------------------------------------------
-    |
-    | The job used to generate images, by default this uses
-    | \Spatie\ResponsiveImages\Jobs\GlideImageJob
-    |
-    */
-
-    'image_job' => \Spatie\ResponsiveImages\Jobs\GenerateGlideImageJob::class,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Queue
-    |--------------------------------------------------------------------------
-    |
-    | If the generate images job is being queued, specify the name of the
-    | target queue. This falls back to the 'default' queue
-    |
-    */
-
-    'queue' => 'default',
-
-    /*
-    |--------------------------------------------------------------------------
     | Max Width
     |--------------------------------------------------------------------------
     |
@@ -71,23 +36,24 @@ return [
     |
     */
 
-    'webp' => true,
+    'webp' => false,
 
     /*
     |--------------------------------------------------------------------------
     | Breakpoints
     |--------------------------------------------------------------------------
     |
-    | Define the breakpoints to art direct your images
+    | These should mirror the settings in resources/assets/scss/media-queries.scss which override the defaults in node_modules/bootstrap/scss/_variables.scss
     |
     */
 
     'breakpoints' => [
-        'sm' => 640,
-        'md' => 768,
-        'lg' => 1024,
-        'xl' => 1280,
-        '2xl' => 1536,
+        'xs' => 576,        // from resources/assets/scss/media-queries.scss
+        'sm' => 768,        // from resources/assets/scss/media-queries.scss
+        'md' => 992,        // from resources/assets/scss/media-queries.scss
+        'lg' => 1200,       // from resources/assets/scss/media-queries.scss
+        'xl' => 1200,       // from node_modules/bootstrap/scss/_variables.scss
+        'xxl' => 1400       // from node_modules/bootstrap/scss/_variables.scss
     ],
 
     /*
@@ -100,5 +66,22 @@ return [
     */
 
     'breakpoint_unit' => 'px',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Container Max Widths
+    |--------------------------------------------------------------------------
+    |
+    | These should mirror the settings in node_modules/bootstrap/scss/_variables.scss. Missing indices are
+    |
+    */
+
+    'container_max_widths' => [
+        'sm' => 540,
+        'md' => 720,
+        'lg' => 960,
+        'xl' => 1140,
+        'xxl' => 1320,
+    ],
 
 ];

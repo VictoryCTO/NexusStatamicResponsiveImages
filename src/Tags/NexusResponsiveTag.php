@@ -1,24 +1,24 @@
 <?php
 
-namespace Spatie\ResponsiveImages\Tags;
+namespace VictoryCTO\NexusResponsiveImages\Tags;
 
-use Spatie\ResponsiveImages\AssetNotFoundException;
-use Spatie\ResponsiveImages\Breakpoint;
-use Spatie\ResponsiveImages\Responsive;
+use VictoryCTO\NexusResponsiveImages\AssetNotFoundException;
+use VictoryCTO\NexusResponsiveImages\Breakpoint;
+use VictoryCTO\NexusResponsiveImages\Responsive;
 use Statamic\Support\Str;
 use Statamic\Tags\Tags;
 
-class ResponsiveTag extends Tags
+class NexusResponsiveTag extends Tags
 {
-    protected static $handle = 'responsive';
+    protected static $handle = 'nexus-responsive';
 
     public static function render(...$arguments): string
     {
         $asset = $arguments[0];
         $parameters = $arguments[1] ?? [];
 
-        /** @var \Spatie\ResponsiveImages\Tags\ResponsiveTag $responsive */
-        $responsive = app(ResponsiveTag::class);
+        /** @var \VictoryCTO\NexusResponsiveImages\Tags\NexusResponsiveTag $responsive */
+        $responsive = app(NexusResponsiveTag::class);
         $responsive->setContext(['url' => $asset]);
         $responsive->setParameters($parameters);
 
@@ -41,7 +41,7 @@ class ResponsiveTag extends Tags
         }
 
         if (in_array($responsive->asset->extension(), ['svg', 'gif'])) {
-            return view('responsive-images::responsiveImage', [
+            return view('nexus-statamic-responsive-images::responsiveImage', [
                 'attributeString' => $this->getAttributeString(),
                 'src' => $responsive->asset->url(),
                 'width' => $responsive->asset->width(),
@@ -64,7 +64,7 @@ class ResponsiveTag extends Tags
                 ];
             });
 
-        return view('responsive-images::responsiveImage', [
+        return view('nexus-statamic-responsive-images::responsiveImage', [
             'attributeString' => $this->getAttributeString(),
             'includePlaceholder' => $includePlaceholder,
             'placeholder' => $sources->last()['placeholder'],
@@ -78,7 +78,7 @@ class ResponsiveTag extends Tags
 
     private function getAttributeString(): string
     {
-        $breakpointPrefixes = collect(array_keys(config('statamic.responsive-images.breakpoints')))
+        $breakpointPrefixes = collect(array_keys(config('nexus.responsive-images.breakpoints')))
             ->map(function ($breakpoint) {
                 return "{$breakpoint}:";
             })->toArray();
@@ -100,13 +100,13 @@ class ResponsiveTag extends Tags
     {
         return $this->params->has('placeholder')
             ? $this->params->get('placeholder')
-            : config('statamic.responsive-images.placeholder', true);
+            : config('nexus.responsive-images.placeholder', true);
     }
 
     private function includeWebp(): bool
     {
         return $this->params->has('webp')
             ? $this->params->get('webp')
-            : config('statamic.responsive-images.webp', true);
+            : config('nexus.responsive-images.webp', true);
     }
 }

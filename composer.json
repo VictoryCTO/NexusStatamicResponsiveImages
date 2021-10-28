@@ -1,36 +1,25 @@
 {
-    "name": "spatie/statamic-responsive-images",
+    "name": "victorycto/nexus-statamic-responsive-images",
     "license": "MIT",
     "type": "statamic-addon",
-    "description": "Responsive Images for Statamic 3",
+    "description": "Responsive Images for Statamic 3 - trimmed down from spatie/statamic-responsive-images",
     "autoload": {
         "psr-4": {
-            "Spatie\\ResponsiveImages\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Spatie\\ResponsiveImages\\Tests\\": "tests"
+            "VictoryCTO\\NexusResponsiveImages\\": "src"
         }
     },
     "extra": {
         "statamic": {
-            "name": "Responsive Images",
-            "description": "Responsive Images for Statamic 3"
+            "name": "Nexus Responsive Images",
+            "description": "Nexus Responsive Images for Statamic 3"
         },
         "laravel": {
             "providers": [
-                "Spatie\\ResponsiveImages\\ServiceProvider"
+                "VictoryCTO\\NexusResponsiveImages\\ServiceProvider"
             ]
         }
     },
     "require": {
         "statamic/cms": "~3.1|~3.2"
-    },
-    "require-dev": {
-        "orchestra/testbench": "^6.9",
-        "phpunit/phpunit": "^9.5",
-        "spatie/phpunit-snapshot-assertions": "^4.2",
-        "spatie/laravel-ray": "^1.10"
     }
 }

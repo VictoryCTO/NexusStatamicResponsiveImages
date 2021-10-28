@@ -1,11 +1,10 @@
 <?php
 
-namespace Spatie\ResponsiveImages;
+namespace VictoryCTO\NexusResponsiveImages;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Spatie\ResponsiveImages\Exceptions\InvalidAssetException;
-use Spatie\ResponsiveImages\Fieldtypes\ResponsiveFieldtype;
+use VictoryCTO\NexusResponsiveImages\Exceptions\InvalidAssetException;
 use Statamic\Assets\Asset;
 use Statamic\Facades\Asset as AssetFacade;
 use Statamic\Fields\Value;
@@ -86,7 +85,7 @@ class Responsive
 
         $breakpoints = $parametersByBreakpoint
             ->map(function (Collection $parameters, string $breakpoint) use (&$currentParams) {
-                $value = config("statamic.responsive-images.breakpoints.$breakpoint");
+                $value = config("nexus.responsive-images.breakpoints.$breakpoint");
 
                 if (! $value && $breakpoint !== 'default') {
                     return null;
@@ -164,7 +163,7 @@ class Responsive
 
     private function parametersByBreakpoint(): Collection
     {
-        $breakpoints = collect(config('statamic.responsive-images.breakpoints'));
+        $breakpoints = collect(config('nexus.responsive-images.breakpoints'));
 
         return collect($this->parameters)
             ->map(function ($value, $key) use ($breakpoints) {

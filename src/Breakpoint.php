@@ -1,12 +1,12 @@
 <?php
 
-namespace Spatie\ResponsiveImages;
+namespace VictoryCTO\NexusResponsiveImages;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 use League\Flysystem\FileNotFoundException;
 use League\Glide\Server;
-use Spatie\ResponsiveImages\Jobs\GenerateImageJob;
+use VictoryCTO\NexusResponsiveImages\Jobs\GenerateImageJob;
 use Statamic\Contracts\Assets\Asset;
 use Statamic\Facades\Blink;
 use Statamic\Imaging\ImageGenerator;
@@ -40,7 +40,7 @@ class Breakpoint implements Arrayable
         $this->parameters = $parameters;
         $this->ratio = $this->parameters['ratio'] ?? $this->asset->width() / $this->asset->height();
 
-        $this->unit = config('statamic.responsive-images.breakpoint_unit', 'px');
+        $this->unit = config('nexus.responsive-images.breakpoint_unit', 'px');
     }
 
     public function getMediaString(): string
@@ -120,7 +120,7 @@ class Breakpoint implements Arrayable
         $this->getWidths()
             ->map(function (int $width) {
                 dispatch($this->buildImageJob($width, null, $this->ratio));
-                if (config('statamic.responsive-images.webp', true)) {
+                if (config('nexus.responsive-images.webp', true)) {
                     dispatch($this->buildImageJob($width, 'webp', $this->ratio));
                 }
             });
@@ -201,7 +201,7 @@ class Breakpoint implements Arrayable
                 return '';
             }
 
-            return view('responsive-images::placeholderSvg', [
+            return view('nexus-statamic-responsive-images::placeholderSvg', [
                 'width' => 32,
                 'height' => round(32 / $this->ratio),
                 'image' => $base64Placeholder,
