@@ -4,6 +4,7 @@ namespace VictoryCTO\NexusResponsiveImages;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use VictoryCTO\NexusResponsiveImages\Exceptions\AssetNotFoundException;
 use VictoryCTO\NexusResponsiveImages\Exceptions\InvalidAssetException;
 use Statamic\Assets\Asset;
 use Statamic\Facades\Asset as AssetFacade;

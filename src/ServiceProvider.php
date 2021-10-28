@@ -15,6 +15,7 @@ use VictoryCTO\NexusResponsiveImages\Listeners\GenerateResponsiveVersions;*/
 
 use Statamic\Events\GlideImageGenerated;
 use VictoryCTO\NexusResponsiveImages\Tags\NexusResponsiveTag;
+use VictoryCTO\NexusResponsiveImages\Tags\NexusResponsiveBgTag;
 use Statamic\Events\AssetUploaded;
 use Statamic\Facades\GraphQL;
 use Statamic\Providers\AddonServiceProvider;
@@ -23,6 +24,7 @@ class ServiceProvider extends AddonServiceProvider
 {
     protected $tags = [
         NexusResponsiveTag::class,
+        NexusResponsiveBgTag::class,
     ];
 
     protected $fieldtypes = [
@@ -86,6 +88,10 @@ class ServiceProvider extends AddonServiceProvider
     {
         Blade::directive('nexusresponsive', function ($arguments) {
             return "<?php echo NexusResponsiveTag::render({$arguments}) ?>";
+        });
+
+        Blade::directive('nexusresponsivebg', function ($arguments) {
+            return "<?php echo NexusResponsiveBgTag::render({$arguments}) ?>";
         });
 
         return $this;

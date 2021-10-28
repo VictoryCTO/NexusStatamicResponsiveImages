@@ -10,6 +10,8 @@ use Statamic\Facades\Asset as AssetFacade;
 use Statamic\Fields\Value;
 use \Statamic\Imaging\GlideImageManipulator;
 use Illuminate\Support\Facades\Storage;
+use VictoryCTO\NexusResponsiveImages\Exceptions\DiskNotConfiguredException;
+use VictoryCTO\NexusResponsiveImages\Exceptions\AssetNotFoundException;
 
 class FileUtils {
 

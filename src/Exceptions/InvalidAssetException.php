@@ -5,7 +5,7 @@ namespace VictoryCTO\NexusResponsiveImages\Exceptions;
 use Exception;
 use Statamic\Assets\Asset;
 
-class InvalidAssetException extends Exception
+class InvalidAssetException extends NexusResponsiveImagesException
 {
     public static function zeroWidthOrHeight(Asset $asset)
     {

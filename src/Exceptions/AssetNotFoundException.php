@@ -1,10 +1,10 @@
 <?php
 
-namespace VictoryCTO\NexusResponsiveImages;
+namespace VictoryCTO\NexusResponsiveImages\Exceptions;
 
 use Exception;
 
-class AssetNotFoundException extends Exception
+class AssetNotFoundException extends NexusResponsiveImagesException
 {
     public static function create($assetParam)
     {
