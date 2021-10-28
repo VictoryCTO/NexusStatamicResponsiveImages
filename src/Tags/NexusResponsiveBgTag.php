@@ -55,6 +55,11 @@ class NexusResponsiveBgTag extends Tags
         });
 
 
-        return view('nexus-responsive-images::responsiveBgImage')->render();
+        return view('nexus-responsive-images::responsiveBgImage',
+            [
+                'breakpoint_max_widths' => $breakpoint_max_widths,
+                'breakpoints'           => $breakpoints,
+                'breakpoint_unit'       => $breakpoint_unit,
+            ])->render();
     }
 }

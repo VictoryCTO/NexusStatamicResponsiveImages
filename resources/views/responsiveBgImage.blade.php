@@ -1,9 +1,3 @@
-<?php
-//load config breakpoints and max widths
-$breakpoints = config('statamic.nexus.responsive-images.breakpoints');
-$breakpoint_unit = config('statamic.nexus.responsive-images.breakpoint_unit');
-$container_max_widths = config('statamic.nexus.responsive-images.container_max_widths');
-?>
 @push('styles')
     <style>
         @php( $i = 0 )
