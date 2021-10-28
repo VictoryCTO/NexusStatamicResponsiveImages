@@ -87,11 +87,11 @@ class ServiceProvider extends AddonServiceProvider
     protected function bootDirectives(): self
     {
         Blade::directive('nexusresponsive', function ($arguments) {
-            return "<?php echo NexusResponsiveTag::render({$arguments}) ?>";
+            return "<?php echo \VictoryCTO\NexusResponsiveImages\Tags\NexusResponsiveTag::render({$arguments}) ?>";
         });
 
         Blade::directive('nexusresponsivebg', function ($arguments) {
-            return "<?php echo NexusResponsiveBgTag::render({$arguments}) ?>";
+            return "<?php echo \VictoryCTO\NexusResponsiveImages\Tags\NexusResponsiveBgTag::render({$arguments}) ?>";
         });
 
         return $this;
