@@ -10,7 +10,7 @@ use Statamic\Tags\Tags;
 
 class NexusResponsiveTag extends Tags
 {
-    protected static $handle = 'nexus-responsive';
+    protected static $handle = 'nexusresponsive';
 
     public static function render(...$arguments): string
     {
@@ -41,7 +41,7 @@ class NexusResponsiveTag extends Tags
         }
 
         if (in_array($responsive->asset->extension(), ['svg', 'gif'])) {
-            return view('nexus-statamic-responsive-images::responsiveImage', [
+            return view('nexus-responsive-images::responsiveImage', [
                 'attributeString' => $this->getAttributeString(),
                 'src' => $responsive->asset->url(),
                 'width' => $responsive->asset->width(),
@@ -64,7 +64,7 @@ class NexusResponsiveTag extends Tags
                 ];
             });
 
-        return view('nexus-statamic-responsive-images::responsiveImage', [
+        return view('nexus-responsive-images::responsiveImage', [
             'attributeString' => $this->getAttributeString(),
             'includePlaceholder' => $includePlaceholder,
             'placeholder' => $sources->last()['placeholder'],
@@ -78,7 +78,7 @@ class NexusResponsiveTag extends Tags
 
     private function getAttributeString(): string
     {
-        $breakpointPrefixes = collect(array_keys(config('nexus.responsive-images.breakpoints')))
+        $breakpointPrefixes = collect(array_keys(config('statamic.nexus.responsive-images.breakpoints')))
             ->map(function ($breakpoint) {
                 return "{$breakpoint}:";
             })->toArray();
@@ -100,13 +100,13 @@ class NexusResponsiveTag extends Tags
     {
         return $this->params->has('placeholder')
             ? $this->params->get('placeholder')
-            : config('nexus.responsive-images.placeholder', true);
+            : config('statamic.nexus.responsive-images.placeholder', true);
     }
 
     private function includeWebp(): bool
     {
         return $this->params->has('webp')
             ? $this->params->get('webp')
-            : config('nexus.responsive-images.webp', true);
+            : config('statamic.nexus.responsive-images.webp', true);
     }
 }

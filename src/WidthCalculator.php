@@ -34,9 +34,9 @@ class WidthCalculator
             $newWidth = (int) floor(sqrt(($predictedFileSize / $pixelPrice) / $ratio));
 
             if ($this->finishedCalculating($predictedFileSize, $newWidth)) {
-                if (config('nexus.responsive-images.max_width')) {
+                if (config('statamic.nexus.responsive-images.max_width')) {
                     $targetWidths = $targetWidths->filter(function ($width) {
-                        return $width <= config('nexus.responsive-images.max_width');
+                        return $width <= config('statamic.nexus.responsive-images.max_width');
                     });
                 }
 

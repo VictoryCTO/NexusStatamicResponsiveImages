@@ -59,22 +59,22 @@ class ServiceProvider extends AddonServiceProvider
 
     protected function bootAddonViews(): self
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'nexus-statamic-responsive-images');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'nexus-responsive-images');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/nexus-statamic-responsive-images'),
-        ], 'responsive-images-views');
+            __DIR__.'/../resources/views' => resource_path('views/vendor/nexus-responsive-images'),
+        ], 'nexus-responsive-images-views');
 
         return $this;
     }
 
     protected function bootAddonConfig(): self
     {
-        /*$this->mergeConfigFrom(__DIR__.'/../config/responsive-images.php', 'statamic.responsive-images');
+        $this->mergeConfigFrom(__DIR__.'/../config/responsive-images.php', 'statamic.nexus.responsive-images');
 
         $this->publishes([
-            __DIR__.'/../config/responsive-images.php' => config_path('statamic/responsive-images.php'),
-        ], 'responsive-images-config');*/
+            __DIR__.'/../config/responsive-images.php' => config_path('statamic/nexus/responsive-images.php'),
+        ], 'responsive-images-config');
 
         return $this;
     }
@@ -90,7 +90,7 @@ class ServiceProvider extends AddonServiceProvider
 
     private function bindImageJob(): self
     {
-        //$this->app->bind(GenerateImageJob::class, config('statamic.responsive-images.image_job'));
+        //$this->app->bind(GenerateImageJob::class, config('statamic.nexus.responsive-images.image_job'));
 
         return $this;
     }

@@ -40,7 +40,7 @@ class Breakpoint implements Arrayable
         $this->parameters = $parameters;
         $this->ratio = $this->parameters['ratio'] ?? $this->asset->width() / $this->asset->height();
 
-        $this->unit = config('nexus.responsive-images.breakpoint_unit', 'px');
+        $this->unit = config('statamic.nexus.responsive-images.breakpoint_unit', 'px');
     }
 
     public function getMediaString(): string
@@ -120,7 +120,7 @@ class Breakpoint implements Arrayable
         $this->getWidths()
             ->map(function (int $width) {
                 dispatch($this->buildImageJob($width, null, $this->ratio));
-                if (config('nexus.responsive-images.webp', true)) {
+                if (config('statamic.nexus.responsive-images.webp', true)) {
                     dispatch($this->buildImageJob($width, 'webp', $this->ratio));
                 }
             });

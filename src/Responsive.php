@@ -163,7 +163,7 @@ class Responsive
 
     private function parametersByBreakpoint(): Collection
     {
-        $breakpoints = collect(config('nexus.responsive-images.breakpoints'));
+        $breakpoints = collect(config('statamic.nexus.responsive-images.breakpoints'));
 
         return collect($this->parameters)
             ->map(function ($value, $key) use ($breakpoints) {
