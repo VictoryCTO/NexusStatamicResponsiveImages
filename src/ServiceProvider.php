@@ -2,7 +2,6 @@
 
 namespace VictoryCTO\NexusResponsiveImages;
 
-use App\Listeners\CopyGlideGeneratedImage;
 use Illuminate\Support\Facades\Blade;
 /*use VictoryCTO\NexusResponsiveImages\Commands\GenerateResponsiveVersionsCommand;
 use VictoryCTO\NexusResponsiveImages\Commands\RegenerateResponsiveVersionsCommand;
@@ -16,6 +15,7 @@ use VictoryCTO\NexusResponsiveImages\Listeners\GenerateResponsiveVersions;*/
 use Statamic\Events\GlideImageGenerated;
 use VictoryCTO\NexusResponsiveImages\Tags\NexusResponsiveTag;
 use VictoryCTO\NexusResponsiveImages\Tags\NexusResponsiveBgTag;
+use VictoryCTO\NexusResponsiveImages\Listeners\CopyGlideGeneratedImage;
 use Statamic\Events\AssetUploaded;
 use Statamic\Facades\GraphQL;
 use Statamic\Providers\AddonServiceProvider;
