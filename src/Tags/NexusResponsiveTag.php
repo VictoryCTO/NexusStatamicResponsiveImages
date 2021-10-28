@@ -34,8 +34,6 @@ class NexusResponsiveTag extends Tags
 
     public function index()
     {
-        return view('nexus-responsive-images::responsiveImage');
-
         try {
             $responsive = new Responsive($this->params->get('src'), $this->params);
         } catch (AssetNotFoundException $e) {
