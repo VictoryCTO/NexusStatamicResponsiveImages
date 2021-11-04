@@ -5,6 +5,7 @@ namespace VictoryCTO\NexusResponsiveImages\Tags;
 use VictoryCTO\NexusResponsiveImages\Exceptions\AssetNotFoundException;
 use VictoryCTO\NexusResponsiveImages\Breakpoint;
 use VictoryCTO\NexusResponsiveImages\Exceptions\NexusResponsiveImagesException;
+use VictoryCTO\NexusResponsiveImages\FileUtils;
 use VictoryCTO\NexusResponsiveImages\Responsive;
 use Statamic\Support\Str;
 use Statamic\Tags\Tags;
@@ -42,7 +43,15 @@ class NexusResponsiveBgTag extends Tags
         array_walk($elements, function(&$value, $elements) {
             //enforce required elements
             foreach(['element','image','width','height'] as $key) {
+                //ensure proper array config
                 if(!is_array($value) || !array_key_exists($key, $value) || empty($value[$key])) throw new NexusResponsiveImagesException('You have a malformed responsive images array', $value, $elements);
+            }
+
+            //ensure image exists
+            try {
+                $asset = FileUtils::retrieveAsset($value['element']);
+            } catch(AssetNotFoundException $ex) {
+                throw new NexusResponsiveImagesException('You are missing a required asset', $value);
             }
 
             //enforce numeric dimensions
