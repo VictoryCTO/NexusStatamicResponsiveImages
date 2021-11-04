@@ -48,7 +48,7 @@ class NexusResponsiveBgTag extends Tags
             }
 
             //ensure image exists
-            $asset = FileUtils::retrieveAsset($value['element']);  //throws AssetNotFoundException
+            $asset = FileUtils::retrieveAsset($value['image']);  //throws AssetNotFoundException
 
             //enforce numeric dimensions
             $value['width'] = str_replace('px', '', $value['width'] );
