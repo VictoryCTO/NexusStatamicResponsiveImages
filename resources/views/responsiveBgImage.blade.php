@@ -10,7 +10,7 @@
             @foreach($elements as $el)
                 @php( $maxH = $el['ratio'] * $maxW )
                     {!! $el['element'] !!} {
-                background-image: url('{{ \VictoryCTO\NexusResponsiveImages\FileUtils::imageUrl( $el['image'], ['w'=>$maxW, 'h'=>$el['height']] ) }}');
+                background-image: url('{{ \VictoryCTO\NexusResponsiveImages\FileUtils::imageUrl( $el['image'], ['w'=>min($el['width'], $maxW ), 'h'=>$el['height']] ) }}');
             }
             @endforeach
             @if($i>1)
