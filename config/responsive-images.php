@@ -54,17 +54,20 @@ return [
     | Breakpoints
     |--------------------------------------------------------------------------
     |
-    | These should mirror the settings in resources/assets/scss/media-queries.scss which override the defaults in node_modules/bootstrap/scss/_variables.scss
+    | These should mirror the settings in one of these files:
+    |   - resources/assets/scss/_variables.scss
+    |   - resources/assets/scss/_media-queries.scss
+    |   - node_modules/bootstrap/scss/_variables.scss (bootstrap defaults)
     |
     */
 
     'breakpoints' => [
-        'xs' => 576,        // from resources/assets/scss/media-queries.scss
-        'sm' => 768,        // from resources/assets/scss/media-queries.scss
-        'md' => 992,        // from resources/assets/scss/media-queries.scss
-        'lg' => 1200,       // from resources/assets/scss/media-queries.scss
-        'xl' => 1200,       // from node_modules/bootstrap/scss/_variables.scss
-        'xxl' => 1400       // from node_modules/bootstrap/scss/_variables.scss
+        'xs' => 0,
+        'sm' => 576,
+        'md' => 768,
+        'lg' => 996,
+        'xl' => 1200,
+        'xxl' => 1488
     ],
 
     /*
@@ -83,16 +86,20 @@ return [
     | Container Max Widths
     |--------------------------------------------------------------------------
     |
-    | These should mirror the settings in node_modules/bootstrap/scss/_variables.scss. Missing indices are
+    | These should mirror the settings in one of these files:
+    |   - resources/assets/scss/_variables.scss
+    |   - resources/assets/scss/_media-queries.scss
+    |   - node_modules/bootstrap/scss/_variables.scss (bootstrap defaults)
     |
     */
+
 
     'container_max_widths' => [
         'sm' => 540,
         'md' => 720,
         'lg' => 960,
         'xl' => 1140,
-        'xxl' => 1320,
+        'xxl' => 1440,
     ],
 
 ];
