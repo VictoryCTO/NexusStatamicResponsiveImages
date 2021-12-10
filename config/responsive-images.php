@@ -55,7 +55,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | These should mirror the settings in one of these files:
-    |   - resources/assets/scss/_variables.scss
+    |   - resources/assets/scss/app.scss
     |   - resources/assets/scss/_media-queries.scss
     |   - node_modules/bootstrap/scss/_variables.scss (bootstrap defaults)
     |
@@ -87,14 +87,14 @@ return [
     |--------------------------------------------------------------------------
     |
     | These should mirror the settings in one of these files:
-    |   - resources/assets/scss/_variables.scss
+    |   - resources/assets/scss/app.scss
     |   - resources/assets/scss/_media-queries.scss
     |   - node_modules/bootstrap/scss/_variables.scss (bootstrap defaults)
     |
     */
 
-
     'container_max_widths' => [
+        'xs' => 528,
         'sm' => 540,
         'md' => 720,
         'lg' => 960,
