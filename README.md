@@ -17,6 +17,12 @@ Require it using Composer.
 ```
 composer require victorycto/nexus-statamic-responsive-images
 ```
+Publish the config file:
+
+```
+php artisan vendor:publish --tag="responsive-images-config"
+```
+
 
 ## Using Responsive Images
 

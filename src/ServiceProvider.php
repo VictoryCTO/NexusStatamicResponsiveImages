@@ -8,7 +8,7 @@ use VictoryCTO\NexusResponsiveImages\Commands\RegenerateResponsiveVersionsComman
 use VictoryCTO\NexusResponsiveImages\Fieldtypes\ResponsiveFieldtype;
 use VictoryCTO\NexusResponsiveImages\GraphQL\BreakpointType;
 use VictoryCTO\NexusResponsiveImages\GraphQL\ResponsiveField;
-use VictoryCTO\NexusResponsiveImages\GraphQL\ResponsiveFieldType as GraphQLResponsiveFieldType;
+use VictoryCTO\NexusResponsiveImages\GraphQL\ResponsiveFieldType as GraphQLResponsiveFildType;
 use VictoryCTO\NexusResponsiveImages\Jobs\GenerateImageJob;
 use VictoryCTO\NexusResponsiveImages\Listeners\GenerateResponsiveVersions;*/
 
@@ -75,10 +75,10 @@ class ServiceProvider extends AddonServiceProvider
 
     protected function bootAddonConfig(): self
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/responsive-images.php', 'statamic.nexus.responsive-images');
+        $this->mergeConfigFrom($config = __DIR__.'/../config/responsive-images.php', 'statamic.nexus.responsive-images');
 
         $this->publishes([
-            __DIR__.'/../config/responsive-images.php' => config_path('statamic/nexus/responsive-images.php'),
+            $config => config_path('statamic/nexus/responsive-images.php'),
         ], 'responsive-images-config');
 
         return $this;
