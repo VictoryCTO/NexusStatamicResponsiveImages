@@ -12,6 +12,7 @@ use VictoryCTO\NexusResponsiveImages\GraphQL\ResponsiveFieldType as GraphQLRespo
 use VictoryCTO\NexusResponsiveImages\Jobs\GenerateImageJob;
 use VictoryCTO\NexusResponsiveImages\Listeners\GenerateResponsiveVersions;*/
 
+use JackSleight\StatamicBardMutator\Facades\Mutator;
 use Statamic\Events\GlideImageGenerated;
 use VictoryCTO\NexusResponsiveImages\Tags\NexusResponsiveTag;
 use VictoryCTO\NexusResponsiveImages\Tags\NexusResponsiveBgTag;
@@ -60,6 +61,23 @@ class ServiceProvider extends AddonServiceProvider
             ->bootDirectives()
             ->bindImageJob()
             ->bootGraphQL();
+
+
+        Mutator::tag('image', function ($tag) {
+            //get the asset by the url
+            $asset = FileUtils::retrieveAsset($tag[0]['attrs']['src']);
+
+            //start by closing the hanging opened tag.
+            $tag = '!-- -->';
+
+            //render the responsive tag
+            $tag .= NexusResponsiveTag::render($asset);
+
+            //now handle the hanging closing tag
+            $tag .= '<!-- --';
+
+            return $tag;
+        });
     }
 
     protected function bootAddonViews(): self
