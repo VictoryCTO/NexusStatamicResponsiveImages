@@ -50,10 +50,14 @@ class NexusResponsiveBgTag extends Tags
             //ensure image exists
             $asset = FileUtils::retrieveAsset($value['image']);  //throws AssetNotFoundException
 
+            //grab dimensions from the asset
+            $value['width'] = $asset->meta('width');
+            $value['height'] = $asset->meta('height');
+
             //enforce numeric dimensions
-            $value['width'] = str_replace('px', '', $value['width'] );
-            $value['height'] = str_replace('px', '', $value['height'] );
-            if(!is_numeric($value['width']) || !is_numeric($value['height'])) throw new NexusResponsiveImagesException('Height and width must be numeric',$value);
+            //$value['width'] = str_replace('px', '', $value['width'] );
+            //$value['height'] = str_replace('px', '', $value['height'] );
+            //if(!is_numeric($value['width']) || !is_numeric($value['height'])) throw new NexusResponsiveImagesException('Height and width must be numeric',$value);
 
             //calculate ratio
             $value['ratio'] = $value['height'] / $value['width'] ;
