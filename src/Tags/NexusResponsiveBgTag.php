@@ -42,13 +42,23 @@ class NexusResponsiveBgTag extends Tags
         //sanitize and parse passed element values (aka make sure the passed values will not mess up calculations below)
         array_walk($elements, function(&$value, $elements) {
             //enforce required elements
-            foreach(['element','image','width','height'] as $key) {
+            //foreach(['element','image','width','height'] as $key) {
+            foreach(['element','image'] as $key) {
                 //ensure proper array config
                 if(!is_array($value) || !array_key_exists($key, $value) || empty($value[$key])) throw new NexusResponsiveImagesException('You have a malformed responsive images array', $value, $elements);
             }
 
-            //ensure image exists
-            $asset = FileUtils::retrieveAsset($value['image']);  //throws AssetNotFoundException
+            //retrieve the asset / ensure image exists
+            if(is_array($value['image'])) {
+                $responsive = new Responsive($value['image']);
+                $asset = $responsive->asset;
+            } else {
+                $responsive = false;
+                $asset = FileUtils::retrieveAsset($value['image']);
+            }
+
+            //store the asset
+            $value['asset'] = $asset;
 
             //grab dimensions from the asset
             $value['width'] = $asset->meta('width');
