@@ -49,13 +49,9 @@ class NexusResponsiveBgTag extends Tags
             }
 
             //retrieve the asset / ensure image exists
-            if(is_array($value['image'])) {
-                $responsive = new Responsive($value['image']);
-                $asset = $responsive->asset;
-            } else {
-                $responsive = false;
-                $asset = FileUtils::retrieveAsset($value['image']);
-            }
+            //$responsive = new Responsive($value['image']);
+            //$asset = $responsive->asset;
+            $asset = FileUtils::retrieveAsset($value['image']);
 
             //store the asset
             $value['asset'] = $asset;

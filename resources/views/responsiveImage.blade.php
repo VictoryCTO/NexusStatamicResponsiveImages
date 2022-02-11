@@ -1,14 +1,16 @@
 @once
-    <script>
-        window.responsiveResizeObserver = new ResizeObserver((entries) => {
-            entries.forEach(entry => {
-                const imgWidth = entry.target.getBoundingClientRect().width;
-                entry.target.parentNode.querySelectorAll('source').forEach((source) => {
-                    source.sizes = Math.ceil(imgWidth / window.innerWidth * 100) + 'vw';
+    @push('scripts')
+        <script>
+            window.responsiveResizeObserver = new ResizeObserver((entries) => {
+                entries.forEach(entry => {
+                    const imgWidth = entry.target.getBoundingClientRect().width;
+                    entry.target.parentNode.querySelectorAll('source').forEach((source) => {
+                        source.sizes = Math.ceil(imgWidth / window.innerWidth * 100) + 'vw';
+                    });
                 });
             });
-        });
-    </script>
+        </script>
+    @endpush
 @endonce
 
 <picture>

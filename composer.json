@@ -22,6 +22,6 @@
     "require": {
         "jacksleight/statamic-bard-mutator": "^1.0",
         "statamic/cms": "~3.1|~3.2",
-        "spatie/statamic-responsive-images": "^2.8.5"
+        "spatie/statamic-responsive-images": "2.5.5"
     }
 }
