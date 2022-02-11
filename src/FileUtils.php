@@ -18,7 +18,9 @@ class FileUtils {
 
     public static function retrieveAsset($assetParam): Asset
     {
-        if ($assetParam instanceof Asset) {
+        $asset = null;
+
+        if (static::isAsset($assetParam)) {
             return $assetParam;
         }
 
@@ -30,23 +32,30 @@ class FileUtils {
             }
         }
 
-        if ($assetParam instanceof Value) {
+        if (!static::isAsset($asset) && $assetParam instanceof Value) {
             $asset = $assetParam->value();
 
             if ($asset instanceof Collection) {
                 $asset = $asset->first();
+            } elseif(is_array($asset) && array_key_exists('src',$asset)) {
+                $asset = self::retrieveAsset($asset['src']);
             }
         }
 
-        if (is_array($assetParam) && isset($assetParam['url'])) {
+        if (!static::isAsset($asset) && is_array($assetParam) && isset($assetParam['url'])) {
             $asset = AssetFacade::findByUrl($assetParam['url']);
         }
 
-        if (! isset($asset)) {
+        if (!static::isAsset($asset)) {
             throw AssetNotFoundException::create($assetParam);
         }
 
         return $asset;
+    }
+
+    public static function isAsset($asset): bool
+    {
+        return (empty($asset)) ? false : ($asset instanceof Asset);
     }
 
     public static function imageUrl( $image, $params ): String
@@ -75,7 +84,7 @@ class FileUtils {
             Log::debug('statamic.nexus.responsive-images.copy_generated_images_to_disk is not set');
             return false;
 
-        //is the disk viable
+            //is the disk viable
         } elseif(!config('filesystems.disks.'.$disk)) {
             throw DiskNotConfiguredException::create($disk);
         }
