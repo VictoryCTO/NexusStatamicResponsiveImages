@@ -3,6 +3,7 @@
 namespace VictoryCTO\NexusResponsiveImages\Listeners;
 
 use \Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use \Statamic\Events\GlideImageGenerated;
 use \Illuminate\Support\Facades\Storage;
@@ -21,7 +22,7 @@ class CopyGlideGeneratedImage implements ShouldQueue
     {
         $path = $event->path;
 
-        Log::debug('GlideImageGenerated Event was created for path:'.$path.', params:'.print_r($event->params, true));
+
 
         $disk = FileUtils::ServeGeneratedImagesFromDisk();
         if(!$disk) {
@@ -37,18 +38,23 @@ class CopyGlideGeneratedImage implements ShouldQueue
         $localPath = public_path('img/') . $path;
         $remotePath = $filePath . '/' . $fileName ;
 
-        //does the file already exist?
-        if ( Storage::disk( $disk )->exists( $remotePath ) ) {
-            Log::debug('File exists, nothing to do');
-        } else {
-            Log::debug(sprintf('Attempting to copy %s to %s as %s', $localPath, $disk, $remotePath));
+        Cache::remember('glideimage-'.md5($remotePath), 300, function() use ($disk, $remotePath, $localPath, $fileName, $filePath) {;
+            Log::debug('Cache Does Not Exist');
+            Log::debug('glideimage-'.md5($remotePath));
+             //does the file already exist?
+            if ( Storage::disk( $disk )->exists( $remotePath ) ) {
+                Log::debug('File exists, nothing to do');
+            } else {
+                Log::debug(sprintf('Attempting to copy %s to %s as %s', $localPath, $disk, $remotePath));
 
-            $job = Storage::disk( $disk )->putFileAs($filePath, new File($localPath), $fileName, 'public');
+                $job = Storage::disk( $disk )->putFileAs($filePath, new File($localPath), $fileName, 'public');
 
-            if($job===false) {
-                //what should we do with a failed copying job??
-                Log::error(sprintf('Error copying %s to %s as %s', $localPath, $disk, $remotePath));
+                if($job===false) {
+                    //what should we do with a failed copying job??
+                    Log::error(sprintf('Error copying %s to %s as %s', $localPath, $disk, $remotePath));
+                }
             }
-        }
+            return 1;
+        });
     }
 }
